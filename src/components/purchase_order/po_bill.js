@@ -1,9 +1,9 @@
 import { Typography, Container, Table, TableRow, TableCell, TableContainer, Paper, TableBody, TableHead, Grid, createTheme, ThemeProvider } from "@mui/material";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 
-export default function Po_bill({ billData }) {
-     // Calculate totals
+// export default function Po_bill({ billData }, ref) {
+    const PoBill =  ({ billData }, ref) => {
      const totals = billData.reduce(
         (acc, item) => {
             acc.totalQty += item.qty;
@@ -63,9 +63,10 @@ export default function Po_bill({ billData }) {
     const colorValue = '1px solid green';
     const styles = {
         head_sect: { display: 'flex', justifyContent: 'space-around' },
-        table_row: { textDecoration: 'underline', fontWeight: 'bold', border: 'none' },
+        table_row: { textDecoration: 'underline', fontWeight: 'bold', border: 'none', fontSize: '14px',  padding: '0px 0px 0px 5px' },
         table_total: { fontWeight: 'bold', border: 'none', textAlign: 'right', padding: '2px 0 2px 0', fontSize: '12px', width: '10px', border: colorValue, borderTop: 'none', borderLeft: 'none' },
         table_font: { fontSize: '10px', fontWeight: 'bold', textAlign: 'center', padding: '0px', border: colorValue, borderTop: 'none' },
+        head_table: {fontSize: '12px', padding: '0px 0px 0px 5px'}
     }
 
     let extra_am = totals.totalNumHole * extra_chg[0].price;
@@ -83,7 +84,7 @@ export default function Po_bill({ billData }) {
 
    
     return (
-        <Container>
+        <Container ref={ref}>
             {/*---Header 01--- */}
             <Grid container spacing={0} sx={{ border: colorValue, borderBottom: 'none' }}>
                 <Grid item xs={3}>
@@ -103,10 +104,10 @@ export default function Po_bill({ billData }) {
                     <Typography variant="body2" sx={{ textAlign: 'center', fontSize: '10px', color: '#3381A6', fontWeight: 'bold' }}>PARIHAR TOUGHENED</Typography>
                 </Grid>
                 <Grid item xs={9}>
-                    <Typography variant="body1" sx={{ textAlign: 'center', fontSize: '26px', fontWeight: 'bold' }}>PARIHAR SAFETY GLASS PRIVATE LIMITED</Typography>
-                    <Typography variant="body2" sx={{ textAlign: 'center', fontWeight: 'bold', marginTop: '5px', fontSize: '14px' }}>S.No.650/A,A1, Bommandapalli Village, Kothakandapalli Post, Thally Road Cross, Old Anekal Road, Hosur- 635 109,<br></br>
-                        Krishnagiri District, Tamilnadu. GST No:33AAJCP6743P1ZS, PH: 6366110134, 6366110135, 6366110139. </Typography>
-                    <Typography variant="body2" sx={{ textAlign: 'center', fontWeight: 'bold', marginTop: '5px', fontSize: '14px' }}>E- Mail :pariharsafetyglass@gmail.com</Typography>
+                    <Typography variant="body1" sx={{ textAlign: 'center', fontSize: '26px', fontWeight: 'bold' }}>RAVI GLASS & PLAYWOODS</Typography>
+                    <Typography variant="body2" sx={{ textAlign: 'center', fontWeight: 'bold', marginTop: '5px', fontSize: '14px' }}>Meenakshi Nilayam, Hardware, Glass & Plywood Dealers in Tirupattur No:19/6, Tirupathur, Tamil Nadu 635601<br></br>
+                       GST No:33AAJCP6743P1ZS, PH: 6366110134, 6366110135, 6366110139. </Typography>
+                    <Typography variant="body2" sx={{ textAlign: 'center', fontWeight: 'bold', marginTop: '5px', fontSize: '14px' }}>E- Mail :ravitradersglass@gmail.com</Typography>
                 </Grid>
             </Grid>
 
@@ -124,11 +125,11 @@ export default function Po_bill({ billData }) {
                         <TableBody>
                             <TableRow>
                                 <TableCell sx={{ border: 'none' }}>
-                                    <Typography variant="body2" sx={{ margin: '0px 0 82px 0' }}>RAVI GLASS, <br></br>Tirupattur</Typography>
+                                    <Typography variant="body2" sx={{ margin: '0px 0 10px 0', fontSize: '12px' }}>RAVI GLASS, <br></br>Tirupattur</Typography>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ borderTop: colorValue, borderBottom: 'none' }}><b>PH.NO: +91-9894421089</b></TableCell>
+                                <TableCell sx={{ borderTop: colorValue, borderBottom: 'none', fontSize: '12px', padding: '2px 0px 0px 5px' }}><b>PH.NO: +91-9894421089</b></TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -145,12 +146,12 @@ export default function Po_bill({ billData }) {
                         <TableBody>
                             <TableRow>
                                 <TableCell colSpan={2} sx={{ border: 'none' }}>
-                                    <Typography variant="body2" sx={{ margin: '0px 0 83px 0' }}>RAVI GLASS, <br></br>Tirupattur</Typography>
+                                    <Typography variant="body2" sx={{ margin: '0px 0 28px 0', fontSize: '12px' }}>RAVI GLASS, <br></br>Tirupattur</Typography>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell></TableCell>
-                                <TableCell sx={{ borderTop: colorValue, borderBottom: 'none', borderLeft: colorValue }}><b>WO NO:</b></TableCell>
+                                <TableCell sx={{ borderTop: colorValue, borderBottom: 'none', borderLeft: colorValue, fontSize: '12px', padding: '2px 0px 0px 5px' }}><b>WO NO:</b></TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -159,31 +160,31 @@ export default function Po_bill({ billData }) {
                     <Table size={'small'}>
                         <TableHead>
                             <TableRow>
-                                <TableCell colSpan={2} sx={{ borderBottom: colorValue }}>
+                                <TableCell colSpan={2} sx={{ borderBottom: colorValue, ...styles.head_table, fontWeight: 'bold', textAlign: 'center', fontSize: '14px'}}>
                                     PROFORMA INVOICE:
                                 </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             <TableRow >
-                                <TableCell sx={{ borderTop: colorValue, borderBottom: colorValue, borderRight: colorValue }}>Proforma Invoice No:</TableCell>
-                                <TableCell sx={{ fontSize: '16px', fontWeight: 'bold', borderTop: colorValue, borderBottom: colorValue }}>PSG-5426</TableCell>
+                                <TableCell sx={{ borderTop: colorValue, borderBottom: colorValue, borderRight: colorValue, ...styles.head_table, }}>Proforma Invoice No:</TableCell>
+                                <TableCell sx={{ ...styles.head_table, fontSize: '14px', fontWeight: 'bold', borderTop: colorValue, borderBottom: colorValue }}>PSG-5426</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ borderBottom: colorValue, borderRight: colorValue }}>PI Date:</TableCell>
-                                <TableCell sx={{ borderBottom: colorValue }}>{new Date().toLocaleDateString('en-GB')}</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue, borderRight: colorValue }}>PI Date:</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue }}>{new Date().toLocaleDateString('en-GB')}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ borderBottom: colorValue, borderRight: colorValue }}>Rev.No & Date:</TableCell>
-                                <TableCell sx={{ borderBottom: colorValue }}></TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue, borderRight: colorValue }}>Rev.No & Date:</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue }}></TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ borderBottom: colorValue, borderRight: colorValue }}>Prepared By:</TableCell>
-                                <TableCell sx={{ borderBottom: colorValue }}>GOPAL J</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue, borderRight: colorValue }}>Prepared By:</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderBottom: colorValue }}>GOPAL J</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ borderRight: colorValue }}>Checked By:</TableCell>
-                                <TableCell>SIVAKUMAR K</TableCell>
+                                <TableCell sx={{ ...styles.head_table, borderRight: colorValue }}>Checked By:</TableCell>
+                                <TableCell sx={styles.head_table}>SIVAKUMAR K</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -280,7 +281,7 @@ export default function Po_bill({ billData }) {
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}>{totals.totalQty}</TableCell>
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}></TableCell>
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}></TableCell>
-                            <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}>{totals.totalCharSqtMtr}</TableCell>
+                            <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}>{(totals.totalCharSqtMtr).toFixed(2)}</TableCell>
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}></TableCell>
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}></TableCell>
                             <TableCell sx={{ ...styles.table_font, fontSize: '12px' }}></TableCell>
@@ -373,7 +374,7 @@ export default function Po_bill({ billData }) {
                                         </TableRow>
                                         <TableRow>
                                             <TableCell colSpan={8} sx={{ ...styles.table_total, textAlign: 'center', fontWeight: 'bold', fontSize: '14px', borderBottom: 'none' }}>GRAND TOTAL</TableCell>
-                                            <TableCell colSpan={2} sx={{ ...styles.table_total, fontWeight: 'bold', textAlign: 'center', borderBottom: 'none', borderRight: 'none' }}>{grand_total.toFixed(2)}</TableCell>
+                                            <TableCell colSpan={2} sx={{ ...styles.table_total, fontWeight: 'bold', textAlign: 'center', borderBottom: 'none', borderRight: 'none' }}>{Math.round(grand_total)}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
@@ -393,7 +394,7 @@ export default function Po_bill({ billData }) {
                                     </TableBody>
                                 </Table>
                             </TableCell>
-                            <TableCell rowSpan={4} colSpan={3} sx={styles.table_font}> For PARIHAR SAFETY GLASS PVT LTD</TableCell>
+                            <TableCell rowSpan={4} colSpan={3} sx={styles.table_font}> For RAVI GLASS & PLAYWOODS</TableCell>
                         </TableRow>
                         {/*--- Note-- */}
                         <TableRow>
@@ -415,17 +416,17 @@ export default function Po_bill({ billData }) {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell sx={{ ...styles.table_font, border: 'none', textAlign: 'left', paddingLeft: '5px' }}>
-                                                Bank Details: <b>SOUTH INDIAN BANK LTD</b> (Anekal Branch-Bangalore)
+                                                Bank Details: <b>Bank name</b> (branch)
                                             </TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell sx={{ ...styles.table_font, border: 'none', textAlign: 'left', paddingLeft: '5px' }}>
-                                                A/c:Type: <b>CA</b> . A/C: No: <b>0664083000000013</b>,
+                                                A/c:Type: <b>CA/saving</b> . A/C: No: <b>number</b>,
                                             </TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell sx={{ ...styles.table_font, border: 'none', textAlign: 'left', paddingLeft: '5px' }}>
-                                                IFSC : <b>SIBL0000664</b>, Name: <b>Parihar Safety Glass Pvt Ltd</b>.
+                                                IFSC : <b>code</b>, Name: <b>RAVI GLASS & PLAYWOODS</b>.
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>
@@ -438,3 +439,9 @@ export default function Po_bill({ billData }) {
         </Container >
     );
 }
+
+
+// Wrap the functional component with React.forwardRef
+const Po_bill = forwardRef(PoBill);
+
+export default Po_bill;

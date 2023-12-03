@@ -15,6 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useRouter } from 'next/router';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -56,9 +57,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function App_Bar() {
+export default function App_Bar({ type }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const router = useRouter();
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -178,6 +180,7 @@ export default function App_Bar() {
                         >
                             Ravi Glass
                         </Typography>
+
                         {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -227,6 +230,16 @@ export default function App_Bar() {
               <MoreIcon />
             </IconButton>
           </Box> */}
+                        {type && type.status && (
+                            <Typography
+                                variant="body1"
+                                sx={{ marginLeft: '70%', textAlign: 'right', cursor: 'pointer' }}
+                                onClick={() => router.push('/')}
+                            >
+                                HOME
+                            </Typography>
+
+                        )}
                     </Toolbar>
                 </AppBar>
                 {renderMobileMenu}
